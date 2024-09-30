@@ -1,0 +1,168 @@
+---
+title: "RWorksheet_Vicinte#3a"
+author: "Anthony Dave Vicinte"
+date: "2024-09-30"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#1. There is a built-in vector LETTERS contains the uppercase letters of the alphabet and letters which contains the lowercase letters of the alphabet.
+#LETTERS
+```{r}
+LETTERS
+```
+```{r}
+letters
+```
+#Based on the above vector LETTERS:
+#a. You need to produce a vector that contains the first 11 letters
+```{r}
+First11 <- LETTERS[1:11]
+First11
+```
+#b. Produce a vector that contains the odd numbered letters.
+```{r}
+OddNumbered <- LETTERS[seq(1,26,by=2)]
+OddNumbered
+```
+#c. Produce a vector that contains the vowels.
+```{r}
+Vowels <- LETTERS[c(1,5,9,15,21)]
+Vowels
+```
+#d. Produce a vector that contains the last 5 lowercase letters.
+```{r}
+Last5 <- tail(letters,5)
+Last5
+```
+#e. Produce a vector that contains letters between 15 to 24 letters in lowercase.
+```{r}
+Between <- letters[15:24]
+Between
+```
+#2. Create a vector(not a dataframe) with the average temperatures in April for Tugue- garao City, Manila, Iloilo City, Tacloban, Samal Island, and Davao City. The average temperatures in Celcius are 42, 39, 34, 34, 30, and 27 degrees.
+#a
+```{r}
+city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+```
+#b
+```{r}
+temp <- c(42, 39, 34, 34, 30, 27)
+```
+
+#c. Create a dataframe to combine the city and the temp by using ‘data.frame(). What the R code and its result?
+```{r}
+CombCityTemp <- data.frame(city, temp)
+CombCityTemp
+```
+#d
+```{r}
+names(CombCityTemp) <- c("City", "Temperature")
+CombCityTemp
+```
+#e.
+```{r}
+str(CombCityTemp)
+#Describe the output: It shows the structure of the data frame.
+```
+#f.
+```{r}
+CombCityTemp[3:4, ]
+```
+#g.
+```{r}
+CombCityTemp[1, ]
+CombCityTemp[6, ]
+```
+#Using Matrices
+```{r}
+matrix(c(5,6,7,4,3,2,1,2,3,7,8,9),nrow = 2)
+```
+```{r}
+matrix(data = c(3,4,5,6,7,8),3,2)
+```
+```{r}
+diag(1,nrow = 6,ncol = 5)
+```
+```{r}
+diag(6)
+```
+#2. Create a matrix of one to eight and eleven to fourteen with four columns and three rows.
+#a.
+```{r}
+Thematrix <- matrix(data = c(1,2,3,4,5,6,7,8,11,12,13,14),3,4)
+Thematrix
+```
+#b.
+```{r}
+multiply <- Thematrix * 2
+multiply
+```
+#c.
+```{r}
+r2 <- Thematrix[2, ]
+r2
+```
+#d.
+```{r}
+multiply[1:2, 3:4]
+```
+#e.
+```{r}
+multiply[3, 2:3]
+```
+#f
+```{r}
+multiply[, 4]
+```
+#g.
+```{r}
+rownames(multiply) <- c("isa","dalawa","tatlo")
+
+colnames(multiply) <- c("uno", "dos", "tres", "quatro")
+multiply
+```
+#h.
+```{r}
+dim(Thematrix) <- c(6, 2)
+Thematrix
+```
+#Using Arrays
+```{r}
+array_dta <- array(c(1:24), c(3,4,2))
+array_dta
+```
+```{r}
+dim(array_dta)
+```
+```{r}
+length(array_dta)
+```
+#• Another way to create arrays
+```{r}
+vectorA <- c(1:24)
+# creating an array
+an_Array <- array(vectorA, dim = c(3,4,2))
+an_Array
+```
+#3. An array contains 1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1
+
+#a. 
+```{r}
+array_data <- array(rep(c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1), 2), dim = c(2, 4, 2))
+array_data
+```
+#b.
+```{r}
+dim(array_data)
+```
+#c.
+```{r}
+dimnames(array_data) <- list(c("a", "b"), c("A", "B", "C", "D"), c("1st-Dimensional Array", "2nd-Dimensional Array"))
+array_data
+```
+
+
