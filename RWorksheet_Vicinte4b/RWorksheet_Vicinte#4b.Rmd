@@ -1,0 +1,119 @@
+---
+title: "RWorksheet_Vicinte#4b"
+author: "Anthony Dave Vicinte"
+date: "2024-10-28"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#1
+vectorA <- c(1,2,3,4,5)
+for(i in vectorA){
+  print(vectorA)
+}
+abs(vectorA)
+```
+```{r}
+#2
+vectorB <- c(1,2,3,4,5)
+
+for (i in vectorB){
+cat(rep("*",i), "\n")
+}
+```
+```{r}
+#3
+fibonacci_sequence <- function(start){
+a <- 0
+b <- 1
+
+repeat {
+fib <- a+b
+a <- b
+b <- fib
+if (!is.na(fib) >= 500) {
+break
+}
+if (!is.na(fib) >= start) {
+print(fib)
+}
+}
+}
+sequencing <- as.integer(readline(prompt = "Enter a number:"))
+
+if (!is.na(sequencing)<1) {
+print("Please enter a higher number")
+} else {
+cat("Fibonacci sequence starting from", sequencing, "up to 500:\n")
+fibonacci_sequence(sequencing)
+}
+```
+```{r}
+#4a
+datas <- read.csv("/cloud/project/RWorksheet_Vicinte4b/Household Data.csv")
+datas
+```
+```{r}
+#4b
+male <- subset(datas, Gender == "M")
+male
+female <- subset(datas, Gender == "F")
+female
+num_male <- nrow(male)
+num_female <- nrow(female)
+cat("Number of observations for Male:", num_male, "\n")
+cat("Number of observations for Female:", num_female, "\n")
+```
+```{r}
+#4c
+Plotting <- c(num_male,num_female)
+names(Plotting) <- c("Male", "Female")
+barplot(Plotting, main = "Male and Female", xlab = "Gender", ylab = "Total Numbers", col = c("blue", "cyan"),legend.text = TRUE, beside = TRUE)
+```
+```{r}
+#5
+bills <- c("Food", "Electricity", "Savings", "Miscellaneous")
+values <- c(60, 10, 5, 25)
+
+Bills <- matrix(values, nrow = 1, ncol = length(bills), dimnames = list(NULL, bills))
+Bills
+
+Plotters <- pie(values, labels = c("Food", "Electricity", "Savings", "Miscellaneous"),col = c("lightblue", "lightgreen", "lightcoral", "lightsalmon"), main = "Expenditures" )
+
+```
+```{r}
+#6a.
+data(iris)
+str(iris)
+```
+```{r}
+#6b.
+means <- colMeans(iris[, 1:4])
+print(means)
+```
+```{r}
+#6c.
+species_count <- table(iris$Species)
+pie(species_count, main="Iris Species Distribution", col=c("red", "green", "blue"), labels=names(species_count))
+```
+```{r}
+#6d.
+setosa <- subset(iris, Species == "setosa")
+versicolor <- subset(iris, Species == "versicolor")
+virginica <- subset(iris, Species == "virginica")
+tail(setosa, 6)
+tail(versicolor, 6)
+tail(virginica, 6)
+```
+```{r}
+#6e.
+plot(iris$Sepal.Length, iris$Sepal.Width, col=iris$Species, pch=19,
+     main="Iris Dataset", xlab="Sepal Length", ylab="Sepal Width",
+     sub="Sepal Width vs Length by Species")
+legend("topright", legend=levels(iris$Species), col=1:3, pch=19) 
+```
+
