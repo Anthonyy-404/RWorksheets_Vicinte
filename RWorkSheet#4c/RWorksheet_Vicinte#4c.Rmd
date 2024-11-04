@@ -1,0 +1,98 @@
+---
+title: "RWorksheet_Vicinte#4c"
+author: "Anthony Dave Vicinte"
+date: "2024-11-04"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#a.
+mpgdata <- read.csv("/cloud/project/RWorkSheet#4c/mpg.csv")
+mpgdata
+```
+
+```{r}
+#b. Which variables from mpg dataset are categorical?
+factoreddata <- str(mpgdata)
+factoreddata
+#These are the categorical variable from mpg dataset.
+#manufacturer
+#model 
+#trans 
+#drv 
+#fl 
+#class 
+```
+```{r}
+#c. Which are continuous variables?
+##These are the continuous variable from mpg dataset.
+#displ 
+#year 
+#cty 
+#hwy 
+```
+```{r}
+#2.a
+library(dplyr)
+mpg_summary <- mpgdata %>%
+  group_by(manufacturer) %>%
+  summarize(UniqueModels = n_distinct(model)) %>%
+  arrange(desc(UniqueModels))
+mpg_summary
+```
+```{r}
+#b.
+library(ggplot2)
+ggplot(mpg_summary, aes(x = reorder(manufacturer, -UniqueModels), y = UniqueModels)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Number of Unique Models per Manufacturer",
+       x = "Manufacturer",
+       y = "Unique Models")
+```
+```{r}
+#2a.
+ggplot(mpgdata, aes(x = model, y = manufacturer)) + geom_point()
+
+```
+```{r}
+#2b.
+#To make it more informative, we need to filter or reorder data to reduce clutter.
+```
+```{r}
+#3a
+top20 <- head(mpgdata, 20)
+ggplot(top20, aes(x = model, y = year)) + geom_point() +
+  labs(title = "Model vs Year (Top 20 Observations)")
+```
+```{r}
+#4a.
+mpg_model_count <- mpgdata %>%
+  group_by(model) %>%
+  summarize(count = n())
+```
+```{r}
+#4b.
+library(ggplot2)
+ggplot(head(mpg_model_count, 20), aes(x = reorder(model, count), y = count)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  coord_flip() +
+  labs(title = "Number of Cars per Model (Top 20)", x = "Model", y = "Count")
+```
+```{r}
+#5.
+ggplot(mpgdata, aes(x = cyl, y = displ, color = displ)) +
+  geom_point() +
+  labs(title = "Relationship between No. of Cylinders and Engine Displacement",
+       x = "Number of Cylinders",
+       y = "Engine Displacement")
+
+```
+```{r}
+
+```
+
+
