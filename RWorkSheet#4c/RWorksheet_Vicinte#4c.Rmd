@@ -90,9 +90,84 @@ ggplot(mpgdata, aes(x = cyl, y = displ, color = displ)) +
        x = "Number of Cylinders",
        y = "Engine Displacement")
 
+#The scatter plot shows a negative correlation between engine displacement and highway MPG, indicating that larger engines generally lead to lower fuel efficiency on highways due to higher fuel consumption.
+
 ```
 ```{r}
+library(ggplot2)
+#6.
+ggplot(mpgdata, aes(x = displ, y = hwy, color = hwy)) +
+  geom_point() +
+  labs(title = "Displacement vs. Highway Miles per Gallon", 
+       x = "Engine Displacement", y = "Highway MPG")
+
+#The plot shows that cars with larger engines generally get lower miles per gallon on the highway. Adding city miles per gallon as a color highlights that cars efficient in the city also tend to be efficient on the highway, usually because they have smaller engines.
+```
+```{r}
+#6.
+traffic_data <-  read.csv("/cloud/project/RWorkSheet#4c/traffic.csv")
+```
+```{r}
+#a.
+nr <- nrow(traffic_data)
+n <- names(traffic_data)
+nr
+n
+```
+```{r}
+#b.
+junction_data <- split(traffic_data, traffic_data$Junction)
 
 ```
+```{r}
+#c.
+library(ggplot2)
+library(dplyr)
+traffic_data$DateTime <- as.POSIXct(traffic_data$DateTime, format="%Y-%m-%d %H:%M:%S")
 
+ggplot(traffic_data, aes(x = DateTime, y = Vehicles, color = factor(Junction))) +
+  geom_line() +
+  labs(title = "Traffic Volume Over Time by Junction",
+       x = "Date and Time",
+       y = "Number of Vehicles",
+       color = "Junction") +
+  theme_minimal() +
+  facet_wrap(~ Junction, scales = "free_y")
+```
+```{r}
+#7.
+#a
+library(readxl)
+alexa <- read_excel("/cloud/project/RWorkSheet#4c/alexa_file.xlsx")
+nrow(alexa)  
+ncol(alexa)
+```
+```{r}
+#b
+variation_counts <- alexa %>%
+  group_by(variation) %>%
+  summarize(total = n())
+variation_counts
+```
+```{r}
+#c
+ggplot(variation_counts, aes(x=variation, y=total)) +
+  geom_bar(stat="identity") +
+  labs(title="Total of Each Variation", x="Variation", y="Total Count")
+```
+```{r}
+#d
+ggplot(alexa, aes(x=date, y=verified_reviews)) +
+  geom_line() +
+  labs(title="Verified Reviews Over Time", x="Date", y="Number of Verified Reviews")
+```
+```{r}
+#e
+variation_ratings <- alexa %>%
+  group_by(variation) %>%
+  summarize(average_rating = mean(rating))
+ggplot(variation_ratings, aes(x=variation, y=average_rating)) +
+  geom_bar(stat="identity") +
+  labs(title="Average Rating by Variation", x="Variation", y="Average Rating")
+```
 
